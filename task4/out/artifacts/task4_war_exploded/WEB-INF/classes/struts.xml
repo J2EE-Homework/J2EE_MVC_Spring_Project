@@ -5,12 +5,20 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <package name="p1" extends="struts-default">
+    <package name="login" extends="struts-default">
         <action name="loginAction" class="action.LoginAction">
             <result name="success">/loginSuccess.jsp</result>
             <result name="failed">/loginFail.jsp</result>
             <result name="error">/loginError.jsp</result>
             <result name="null">/loginNull.jsp</result>
+        </action>
+    </package>
+    <package name="register" extends="struts-default">
+        <action name="registerAction" class="action.RegisterAction">
+            <result name="success">/registerSuccess.jsp</result>
+            <result name="failed">/registerFail.jsp</result>
+            <result name="error">/registerError.jsp</result>
+            <result name="input">/register.jsp</result>
         </action>
     </package>
 </struts>

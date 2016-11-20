@@ -24,27 +24,27 @@ public class StudentService implements ServiceInter {
         dao = new StudentDAO() ;
     }
 
-    @Override
+
     public int add(Student student) {
         return dao.add(student);
     }
 
-    @Override
+
     public int delete(int id) {
         return dao.delete(id);
     }
 
-    @Override
+
     public int modify(Student student) {
         return dao.modify(student);
     }
 
-    @Override
+
     public List<?> list() {
         return dao.list();
     }
 
-    @Override
+
     //成功返回1，密码错误返回－1，没有这个用户返回－2
     public int login(Student student) {
         List<Student> studentList = dao.list();
@@ -68,5 +68,20 @@ public class StudentService implements ServiceInter {
         //没有这个用户
         return -2;
 
+    }
+
+    //注册成功返回1，注册失败(用户已存在返回)0,其他错误返回-1
+    public int register(Student student) {
+
+        List<Student> studentList = dao.list();
+        Iterator<Student> iterator = studentList.iterator();
+        while (iterator.hasNext()){
+            Student stu = iterator.next();
+            if (student.getName().equals(stu.getName())){
+                return 0;
+            }
+        }
+        //插入数据 1成功插入 －1插入失败
+        return dao.add(student);
     }
 }

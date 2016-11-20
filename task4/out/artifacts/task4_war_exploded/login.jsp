@@ -14,7 +14,8 @@
       <form action="/task4/loginAction.action" method="post">
         账号：<input name="account" type="text"><br/>
         密码: <input name="password" type="password"><br/>
-        <input type="submit" value="登录">
+        <input type="submit" value="登录"><br>
+        <input type="button" value="注册" onclick="location.href='register.jsp'">
       </form>
   </body>
 </html>

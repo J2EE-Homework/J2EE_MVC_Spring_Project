@@ -18,4 +18,6 @@ public interface ServiceInter {
     public abstract List<?> list();
 
     public abstract int login(Student student);
+
+    public abstract int register(Student student);
 }
