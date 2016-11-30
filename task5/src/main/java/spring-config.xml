@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="dao_arg1" class="dao.StudentDAO" >
+        <constructor-arg name="nothing" value="nothing"/>
+    </bean>
+    <bean name="serviceImp" class="service.StudentService">
+        <constructor-arg name="dao" type="dao.StudentDAO" ref="dao_arg1"/>
+    </bean>
+    <!--<bean name="loginAction" class="action.LoginAction">-->
+        <!--<property name="serviceImp">-->
+           <!--<ref bean="serviceImp"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+</beans>

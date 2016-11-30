@@ -4,7 +4,10 @@ package action;/**
 
 import com.opensymphony.xwork2.ActionSupport;
 import model.Student;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import service.StudentService;
+import servletImp.ServiceInter;
 
 /**
  * register action class
@@ -20,10 +23,18 @@ public class RegisterAction extends ActionSupport {
 
     private String register_password2 ;
 
-    private StudentService service ;
+    private ServiceInter service ;
 
     public RegisterAction() {
         service = new StudentService();
+    }
+
+    public ServiceInter getService() {
+        return service;
+    }
+
+    public void setService(ServiceInter service) {
+        this.service = service;
     }
 
     public String getRegister_name() {
@@ -55,6 +66,9 @@ public class RegisterAction extends ActionSupport {
     public String execute() throws Exception{
         //判断是否注册成功
         Student student = new Student(register_name,register_password);
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+        service = (ServiceInter) context.getBean("serviceImp");
         //System.out.println("-----------------");
         switch (service.hibernateRegister(student)){
             case 1:

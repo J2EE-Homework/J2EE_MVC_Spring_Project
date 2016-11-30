@@ -3,7 +3,11 @@ package action;/**
  */
 
 import model.Student;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import service.StudentService;
+import servletImp.ServiceInter;
 
 /**
  * login action in struts2
@@ -17,10 +21,16 @@ public class LoginAction{
 
     private String password ;
 
-    private StudentService service ;
+    //接口，解耦合不宜选用具体实现类
+    private ServiceInter serviceImp ;
 
-    public LoginAction() {
-        service = new StudentService("nothing");
+    public ServiceInter getServiceImp() {
+        return serviceImp;
+    }
+
+    public void setServiceImp(ServiceInter serviceImp) {
+        System.out.println("属性注入－－－－－－－－－－");
+        this.serviceImp = serviceImp;
     }
 
     public String getAccount() {
@@ -45,9 +55,12 @@ public class LoginAction{
         //判断登录成功与否
         Student student = new Student(account,password);
 
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+        serviceImp = (ServiceInter) context.getBean("serviceImp");
+
         //System.out.println("------------------");
 
-        switch (service.hibernateLogin(student)){
+        switch (serviceImp.hibernateLogin(student)){
             case 1:
                 // 登录成功
                 return "success";
